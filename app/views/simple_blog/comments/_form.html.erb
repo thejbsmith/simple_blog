@@ -1,8 +1,11 @@
-<h3>New comment</h3>
 <%= form_for [@post, @post.comments.build] do |f| %>
-  <p>
-    <%= f.label :text %><br />
-    <%= f.text_area :text %>
-  </p>
-  <%= f.submit %>
+  <legend>New Comment</legend>
+  <%= f.text_area :text, :rows => 3 %>
+  <div>
+    <%= f.submit 'Post Comment', :class => 'btn btn-primary' %>
+  </div>
 <% end %>
+
+
+
+

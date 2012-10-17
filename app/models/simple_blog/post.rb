@@ -21,12 +21,8 @@ module SimpleBlog
       post.slug = post.title.parameterize if post.slug.nil? or post.slug.empty?
     end
 
-
-
-
     # Class methods
-    def self.published_in_category(category_slug)
-      category = Category.find_by_slug(category_slug)
+    def self.published_in_category(category)
       category.posts.published
     end
 

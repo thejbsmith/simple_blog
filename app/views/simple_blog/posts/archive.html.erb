@@ -1,2 +1,5 @@
-<h1>Archive for <%= "#{Date::MONTHNAMES[@month]} #{@year}" %></h1>
+<div class="page-header">
+  <h1>Archive for <%= "#{Date::MONTHNAMES[@month]} #{@year}" %></h1>
+</div>
+
 <%= render :partial => "post", :collection => @posts %>

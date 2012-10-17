@@ -8,8 +8,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="container">
 
-<%= yield %>
+    <div>
+      <p>
+        <a href="/simple_blog">Home</a>
+        <a href="/simple_blog/financial-stuff">Financial Stuff Category</a>
+        <a href="/simple_blog/archive/2012/8">August 2012 Archive</a>
+      </p>
+    </div>
+
+    <%= yield %>
+  </div>
 
 </body>
 </html>

@@ -1,39 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1><%= @post.title %> <small><%= @post.date.strftime('%B %e, %Y') %></small></h1>
+</div>
 
-<p>
-  <b>Title:</b>
-  <%= @post.title %>
-</p>
-
-<p>
-  <b>Slug:</b>
-  <%= @post.slug %>
-</p>
-
-<p>
-  <b>Content:</b>
-  <%= @post.content %>
-</p>
-
-<p>
-  <b>Excerpt:</b>
-  <%= @post.excerpt %>
-</p>
-
-<p>
-  <b>Tags:</b>
-  <%= tag_links(@post.tags) %>
-</p>
-
-<p>
-  <b>Date:</b>
-  <%= @post.date %>
-</p>
-
-<p>
-  <b>Published:</b>
-  <%= @post.published %>
-</p>
+<p><%= @post.content.html_safe %></p>
+<p><b>Tags:</b> <%= tag_links(@post.tags) %></p>
 
 <h3>Comments</h3>
 <%= render @post.comments %>

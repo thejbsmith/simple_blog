@@ -70,8 +70,8 @@ module SimpleBlog
 
 
     def category
-      category_slug = params[:slug]
-      @posts = Post.published_in_category(category_slug)
+      @category = Category.find_by_slug(params[:slug])
+      @posts = Post.published_in_category(@category)
     end
 
     def feed

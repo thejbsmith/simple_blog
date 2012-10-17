@@ -1,32 +1,7 @@
-<h1>Listing posts</h1>
+<div class="page-header">
+  <h1>Simple Blog</h1>
+</div>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Slug</th>
-    <th>Content</th>
-    <th>Excerpt</th>
-    <th>Tags</th>
-    <th>Date</th>
-    <th>Published</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @posts.each do |post| %>
-  <tr>
-    <td><%= post.title %></td>
-    <td><%= post.slug %></td>
-    <td><%= post.content %></td>
-    <td><%= post.excerpt %></td>
-    <td><%= tag_links(post.tags) %></td>
-    <td><%= post.date %></td>
-    <td><%= post.published %></td>
-    <td><%= link_to 'Show', post_path(post.slug) %></td>
-  </tr>
-<% end %>
-</table>
-
+<%= render :partial => "post", :collection => @posts %>
 
 <p><%= link_to 'RSS Feed', feed_path %></p>
