@@ -6,7 +6,6 @@ class CreateSimpleBlogPosts < ActiveRecord::Migration
       t.string :slug
       t.text :content
       t.text :excerpt
-      t.string :tags
       t.datetime :date
       t.boolean :published
 

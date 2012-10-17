@@ -22,7 +22,7 @@
 
 <p>
   <b>Tags:</b>
-  <%= @post.tags %>
+  <%= tag_links(@post.tags) %>
 </p>
 
 <p>
@@ -40,6 +40,4 @@
 
 <%= render "simple_blog/comments/form" %>
 
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Back', root_path %>

@@ -2,21 +2,13 @@ require_dependency "simple_blog/application_controller"
 
 module SimpleBlog
   class PostsController < ApplicationController
-    # GET /posts
-    # GET /posts.json
+
     def index
-      @posts = Post.all
-  
-      respond_to do |format|
-        format.html # index.html.erb
-        format.json { render json: @posts }
-      end
+      @posts = Post.published
     end
   
-    # GET /posts/1
-    # GET /posts/1.json
     def show
-      @post = Post.find(params[:id])
+      @post = Post.find_by_slug(params[:slug])
   
       respond_to do |format|
         format.html # show.html.erb
@@ -24,8 +16,6 @@ module SimpleBlog
       end
     end
   
-    # GET /posts/new
-    # GET /posts/new.json
     def new
       @post = Post.new
   
@@ -35,13 +25,10 @@ module SimpleBlog
       end
     end
   
-    # GET /posts/1/edit
     def edit
       @post = Post.find(params[:id])
     end
   
-    # POST /posts
-    # POST /posts.json
     def create
       @post = Post.new(params[:post])
   
@@ -56,8 +43,6 @@ module SimpleBlog
       end
     end
   
-    # PUT /posts/1
-    # PUT /posts/1.json
     def update
       @post = Post.find(params[:id])
   
@@ -72,8 +57,6 @@ module SimpleBlog
       end
     end
   
-    # DELETE /posts/1
-    # DELETE /posts/1.json
     def destroy
       @post = Post.find(params[:id])
       @post.destroy
@@ -83,5 +66,32 @@ module SimpleBlog
         format.json { head :no_content }
       end
     end
+
+
+
+    def category
+      category_slug = params[:slug]
+      @posts = Post.published_in_category(category_slug)
+    end
+
+    def feed
+      @posts = Post.published
+      respond_to do |format|
+        format.rss { render :layout => false } #index.rss.builder
+        format.all { head :not_found }
+      end
+    end
+
+    def archive
+      @month = params[:month].to_i
+      @year  = params[:year].to_i
+      @posts = Post.published_in(@month, @year)
+    end
+
+    def tag
+      @tag = params[:tag]
+      @posts = Post.tagged_with(@tag)
+    end
+
   end
 end
