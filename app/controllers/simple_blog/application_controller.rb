@@ -1,4 +1,2 @@
-module SimpleBlog
-  class ApplicationController < ActionController::Base
-  end
+class SimpleBlog::ApplicationController < ApplicationController
 end

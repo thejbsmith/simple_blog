@@ -18,6 +18,10 @@ module SimpleBlog
   
     def new
       @post = Post.new
+      puts 'Post controller new'
+      @post.date = Time.now
+
+      puts @post
   
       respond_to do |format|
         format.html # new.html.erb
@@ -91,6 +95,11 @@ module SimpleBlog
     def tag
       @tag = params[:tag]
       @posts = Post.tagged_with(@tag)
+    end
+
+    def search
+      @query = params[:q]
+      @posts = Post.search(@query)
     end
 
   end

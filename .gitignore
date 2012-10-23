@@ -16,3 +16,4 @@ rerun.txt
 pickle-email-*.html
 /test/dummy/log/*
 /test/dummy/tmp/*
+*.DS_STORE

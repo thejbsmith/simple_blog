@@ -17,7 +17,7 @@ SimpleBlog::Engine.routes.draw do
   get '/feed'                   => 'posts#feed',      :as => :feed,       :defaults => { :format => :rss }
   get '/archive/:year/:month'   => 'posts#archive',   :as => :archive
   get '/tags/:tag'              => 'posts#tag',       :as => :tag
-
-  get '/:slug'                   => 'posts#category',  :as => :category    
+  get '/search'                 => 'posts#search',    :as => :search
+  get '/:slug'                  => 'posts#category',  :as => :category
 
 end

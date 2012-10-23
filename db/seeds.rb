@@ -5,17 +5,20 @@ category = SimpleBlog::Category.create({
 
 tags1 = SimpleBlog::Tag.create([
   {name: 'financial'},
-  {name: 'smart'}
+  {name: 'smart'},
+  {name: 'two words'}
 ])
 
 tags2 = SimpleBlog::Tag.create([
   {name: 'guru'},
-  {name: 'sample'}
+  {name: 'sample'},
+  {name: 'Two Words'}
 ])
 
 tags3 = SimpleBlog::Tag.create([
   {name: 'financial'},
-  {name: 'guru'}
+  {name: 'guru'},
+  {name: 'two words'}
 ])
 
 tags4 = SimpleBlog::Tag.create([
@@ -25,7 +28,8 @@ tags4 = SimpleBlog::Tag.create([
 
 tags5 = SimpleBlog::Tag.create([
   {name: 'guru'},
-  {name: 'financial'}
+  {name: 'financial'},
+  {name: 'Two Words'}
 ])
 
 post1 = SimpleBlog::Post.create({

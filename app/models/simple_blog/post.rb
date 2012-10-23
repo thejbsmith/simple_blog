@@ -6,8 +6,10 @@ module SimpleBlog
     has_many    :comments
     has_many    :tags
 
+    accepts_nested_attributes_for :tags, :allow_destroy => true
+
     # Attributes
-    attr_accessible :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id
+    attr_accessible :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id, :tags_attributes
 
     # Validations
     validates :title, presence: true, uniqueness: true
@@ -19,6 +21,12 @@ module SimpleBlog
     # Callbacks
     set_callback(:save, :before) do |post|
       post.slug = post.title.parameterize if post.slug.nil? or post.slug.empty?
+      # TODO: May need to remove certain tags from the excerpt (image tags specifically)
+      post.excerpt = HTML::Document.new(post.content).find(:tag => 'p').to_s if post.excerpt.nil? or post.excerpt.empty?
+    end
+
+    set_callback(:initialize, :after) do |post|
+      post.date ||= Time.now
     end
 
     # Class methods
@@ -37,7 +45,14 @@ module SimpleBlog
     end
 
     def self.tagged_with(tag)
-      Post.joins(:tags).where("#{Tag.table_name}.name = ?", tag)
+      # TODO: Decide if we want to match tags based on capitalization or not
+      #       Right now this only matches EXACTLY. Word != word
+      self.joins(:tags).where("#{Tag.table_name}.name = ?", tag)
+    end
+
+    def self.search(query)
+      table = self.arel_table
+      self.where(table[:title].matches("%#{query}%").or(table[:content].matches("%#{query}%"))).published
     end
 
   end
