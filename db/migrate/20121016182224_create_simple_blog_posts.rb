@@ -4,6 +4,7 @@ class CreateSimpleBlogPosts < ActiveRecord::Migration
       t.references :category
       t.string :title
       t.string :slug
+      t.string :featured_image
       t.text :content
       t.text :excerpt
       t.datetime :date

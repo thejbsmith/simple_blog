@@ -1,4 +1,5 @@
 if defined?(ActiveAdmin)
+
   ActiveAdmin.register SimpleBlog::Post, :as => 'Post' do
     # controller do
     #   authorize_resource
@@ -11,10 +12,9 @@ if defined?(ActiveAdmin)
     # Index Page
     index do                            
       column :title
-      column('Tags')        { |post| post.tags.pluck(:name).join(', ') }
+      column('Tags')          { |post| post.tags.pluck(:name).join(', ') }
       column :published               
       column :date
-      # TODO: Would be nice to actually have links to the categories in activeadmin
       column :category
       default_actions                   
     end
@@ -23,22 +23,23 @@ if defined?(ActiveAdmin)
     show do |blog_post|
       attributes_table do
         row :title
-        row('Tags')         { |post| post.tags.pluck(:name).join(', ') }
+        row('Tags')           { |post| post.tags.pluck(:name).join(', ') }
         row :published
         row :date
         row :category
-        row :content
+        row('Content')        { |post| post.content.html_safe }
       end
     end
 
     # Form
-    form do |f|
+    form :html => {:multipart => true} do |f|
       f.inputs "Post Details" do
         f.input :category
         f.input :title
         f.input :slug
-        f.input :content
-        f.input :excerpt
+        f.input :featured_image, :as => :rich_picker, :config => { :style => 'width: 400px !important;', :placeholder_image => image_path('simple_blog/placeholder.png'), :preview_size => '200px' }
+        f.input :content, :as => :rich, :config => { :width => '76%', :height => '400px' }
+        f.input :excerpt, :as => :rich, :config => { :width => '76%', :height => '400px' }
         f.input :date
         f.input :published, :as => :radio
         f.has_many :tags do |tag|
@@ -57,4 +58,5 @@ if defined?(ActiveAdmin)
     end
 
   end
+
 end

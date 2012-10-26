@@ -7,8 +7,8 @@ require "simple_blog/version"
 Gem::Specification.new do |s|
   s.name        = "simple_blog"
   s.version     = SimpleBlog::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
+  s.authors     = ["Jim Smith"]
+  s.email       = ["jim@jimsmithdesign.com"]
   s.homepage    = "TODO"
   s.summary     = "TODO: Summary of SimpleBlog."
   s.description = "TODO: Description of SimpleBlog."
@@ -16,8 +16,10 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 3.2.8"
+  # TODO: Need to actually figure out which version of rails is required.
+  s.add_dependency "rails", "~> 3.2.0"
   # s.add_dependency "jquery-rails"
+  s.add_dependency "rich"
 
-  s.add_development_dependency "sqlite3"
+  # s.add_development_dependency "sqlite3"
 end

@@ -9,7 +9,7 @@ module SimpleBlog
     accepts_nested_attributes_for :tags, :allow_destroy => true
 
     # Attributes
-    attr_accessible :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id, :tags_attributes
+    attr_accessible :featured_image, :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id, :tags_attributes
 
     # Validations
     validates :title, presence: true, uniqueness: true
@@ -21,8 +21,9 @@ module SimpleBlog
     # Callbacks
     set_callback(:save, :before) do |post|
       post.slug = post.title.parameterize if post.slug.nil? or post.slug.empty?
-      # TODO: May need to remove certain tags from the excerpt (image tags specifically)
-      post.excerpt = HTML::Document.new(post.content).find(:tag => 'p').to_s if post.excerpt.nil? or post.excerpt.empty?
+      
+      # Create excerpt based on content. Will use the first paragraph tag and remove all image tags from it if the excerpt field is left blank
+      post.excerpt = HTML::Document.new(post.content).find(:tag => 'p').to_s.gsub(/<img .*?>/i, '') if post.excerpt.nil? or post.excerpt.empty?
     end
 
     set_callback(:initialize, :after) do |post|
