@@ -21,5 +21,7 @@ Gem::Specification.new do |s|
   # s.add_dependency "jquery-rails"
   s.add_dependency "rich"
 
+  s.add_dependency 'meta-tags'
+
   # s.add_development_dependency "sqlite3"
 end

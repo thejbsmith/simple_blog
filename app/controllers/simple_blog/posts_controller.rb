@@ -9,6 +9,20 @@ module SimpleBlog
   
     def show
       @post = Post.find_by_slug(params[:slug])
+
+      set_meta_tags :title => @post.title
+
+      unless @post.meta_description.blank?
+        set_meta_tags :description => @post.meta_description
+      end
+
+      unless @post.meta_keywords.blank?
+        set_meta_tags :keywords => @post.meta_keywords
+      end
+
+      unless @post.open_graph_tags.empty?
+        set_meta_tags :open_graph => Hash[ @post.open_graph_tags.map { |open_graph_tag| [open_graph_tag.name, open_graph_tag.content] } ]
+      end
   
       respond_to do |format|
         format.html # show.html.erb
@@ -18,10 +32,7 @@ module SimpleBlog
   
     def new
       @post = Post.new
-      puts 'Post controller new'
       @post.date = Time.now
-
-      puts @post
   
       respond_to do |format|
         format.html # new.html.erb

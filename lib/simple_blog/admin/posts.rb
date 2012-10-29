@@ -43,11 +43,22 @@ if defined?(ActiveAdmin)
         f.input :date
         f.input :published, :as => :radio
         f.has_many :tags do |tag|
-          tag.inputs "Tags" do
+          tag.inputs "Tag" do
             tag.input :name
             # TODO: Look at adding AJAX link to remove tags
             tag.input :_destroy, :as => :boolean, :required => false, :label => 'Remove'
             #link_to "Delete", edit_admin_tag_path(tag.object), method: "delete", class: "button" unless tag.object.new_record?
+          end
+        end
+      end
+      f.inputs "Meta Details" do
+        f.input :meta_keywords
+        f.input :meta_description
+        f.has_many :open_graph_tags do |open_graph_tag|
+          open_graph_tag.inputs "Open Graph Tag" do
+            open_graph_tag.input :name
+            open_graph_tag.input :content
+            open_graph_tag.input :_destroy, :as => :boolean, :required => false, :label => 'Remove'
           end
         end
       end

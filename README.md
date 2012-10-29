@@ -22,6 +22,13 @@ If using ActiveAdmin add:
 //= require rich
 to app/assets/javascripts/active_admin.js
 
+SimpleBlog uses meta-tags (link to meta-tags gem)
+In order to display the meta tags correctly, go to your applications layout file and add
+<%= display_meta_tags :site => 'My website' %> (this will display each blog post in the title tag as My Website | Blog Post Title)
+  If you don't want to show your site name, simple remove the :site reference
+This will replace the 'title' tag, so remove that from your application layout as well
+In each blog post you can currently specify keywords and description. The title is used as the meta title
+
 
 
 ## Maybe ask if user is using ActiveAdmin

@@ -1,3 +1,4 @@
+require 'meta_tags'
 require 'rich'
 
 module SimpleBlog

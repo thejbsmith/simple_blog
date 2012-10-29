@@ -5,11 +5,13 @@ module SimpleBlog
     belongs_to  :category
     has_many    :comments
     has_many    :tags
+    has_many    :open_graph_tags
 
     accepts_nested_attributes_for :tags, :allow_destroy => true
+    accepts_nested_attributes_for :open_graph_tags, :allow_destroy => true
 
     # Attributes
-    attr_accessible :featured_image, :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id, :tags_attributes
+    attr_accessible :featured_image, :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id, :tags_attributes, :open_graph_tags_attributes, :meta_keywords, :meta_description
 
     # Validations
     validates :title, presence: true, uniqueness: true
