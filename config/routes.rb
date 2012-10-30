@@ -15,5 +15,6 @@ SimpleBlog::Engine.routes.draw do
   get '/tags/:tag'              => 'posts#tag',       :as => :tag
   get '/search'                 => 'posts#search',    :as => :search
   get '/:slug'                  => 'posts#category',  :as => :category
+  get '/author/:author_id'      => 'posts#author',    :as => :author
 
 end

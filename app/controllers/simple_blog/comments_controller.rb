@@ -6,6 +6,11 @@ module SimpleBlog
     def create
       @post = Post.find(params[:post_id])
       @comment = @post.comments.build(params[:comment])
+
+      if simple_blog_current_user
+        @comment.commenter_id = simple_blog_current_user.id
+      end
+
       if @post.save
         flash[:notice] = "Comment has been created!"
         #redirect_to post_path(@post)

@@ -1,9 +1,7 @@
 <div class="page-header">
-  <h1>Simple Blog</h1>
+  <h1>Articles by <%= @author_display_name %></h1>
 </div>
 
 <%= render :partial => "post", :collection => @posts %>
 
 <%= page_navigation_links @posts %>
-
-<p><%= link_to 'RSS Feed', feed_path %></p>

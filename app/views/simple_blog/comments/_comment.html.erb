@@ -1,4 +1,4 @@
 <div class="well">
   <p><%= comment.text %></p>
-  <small>Posted at <%= comment.created_at.strftime('%l:%M %p on %B %e, %Y') %> by [[User Goes Here]]</small>
+  <small>Posted at <%= comment.created_at.strftime('%l:%M %p on %B %e, %Y') %> by <%= commenter_name(comment) %></small>
 </div>

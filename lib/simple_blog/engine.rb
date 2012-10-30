@@ -1,3 +1,4 @@
+require 'will_paginate'
 require 'meta_tags'
 require 'rich'
 

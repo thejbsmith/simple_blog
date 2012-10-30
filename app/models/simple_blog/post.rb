@@ -1,7 +1,11 @@
 module SimpleBlog
   class Post < ActiveRecord::Base
 
+    # Pagination
+    self.per_page = 10
+
     # Relations
+    belongs_to  :author, :class_name => SimpleBlog.author_user_class
     belongs_to  :category
     has_many    :comments
     has_many    :tags
@@ -11,7 +15,7 @@ module SimpleBlog
     accepts_nested_attributes_for :open_graph_tags, :allow_destroy => true
 
     # Attributes
-    attr_accessible :featured_image, :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id, :tags_attributes, :open_graph_tags_attributes, :meta_keywords, :meta_description
+    attr_accessible :featured_image, :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id, :tags_attributes, :open_graph_tags_attributes, :meta_keywords, :meta_description, :author_id
 
     # Validations
     validates :title, presence: true, uniqueness: true
