@@ -1,4 +1,4 @@
-require 'will_paginate'
+require 'kaminari'
 require 'meta_tags'
 require 'rich'
 

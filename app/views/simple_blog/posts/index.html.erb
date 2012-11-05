@@ -4,6 +4,6 @@
 
 <%= render :partial => "post", :collection => @posts %>
 
-<%= page_navigation_links @posts %>
+<%= paginate @posts %>
 
 <p><%= link_to 'RSS Feed', feed_path %></p>

@@ -2,7 +2,7 @@ module SimpleBlog
   class Post < ActiveRecord::Base
 
     # Pagination
-    self.per_page = 10
+    paginates_per 10
 
     # Relations
     belongs_to  :author, :class_name => SimpleBlog.author_user_class

@@ -34,7 +34,7 @@ if defined?(ActiveAdmin)
     # Form
     form :html => {:multipart => true} do |f|
       f.inputs "Post Details" do
-        f.input :author, :collection => SimpleBlog.author_user_class.constantize.all.collect {|author| [ author.instance_eval("self.#{SimpleBlog.author_user_class_display_field}"), author.id ] }
+        f.input :author, :collection => SimpleBlog.author_user_class.constantize.class_eval(SimpleBlog.author_scope).collect {|author| [ author.instance_eval("self.#{SimpleBlog.author_user_class_display_field}"), author.id ] }
         f.input :category
         f.input :title
         f.input :slug

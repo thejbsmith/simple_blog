@@ -5,6 +5,8 @@ module SimpleBlog
   # Posts
   mattr_accessor :author_user_class
   mattr_accessor :author_user_class_display_field
+  mattr_accessor :author_scope
+  @@author_scope = 'all'
 
   # Comments
   mattr_accessor :enable_comments

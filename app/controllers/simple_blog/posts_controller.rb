@@ -4,7 +4,7 @@ module SimpleBlog
   class PostsController < ApplicationController
 
     def index
-      @posts = Post.published.paginate(:page => params[:page])
+      @posts = Post.published.page(params[:page])
     end
   
     def show
@@ -28,7 +28,7 @@ module SimpleBlog
 
     def category
       @category = Category.find_by_slug(params[:slug])
-      @posts = Post.published_in_category(@category).paginate(:page => params[:page])
+      @posts = Post.published_in_category(@category).page(params[:page])
 
       set_meta_tags :description => "Smarteys blog articles for #{@category.name}"
       set_meta_tags :keywords => "smarteys, blog, #{@category.name}"
@@ -45,7 +45,7 @@ module SimpleBlog
     def archive
       @month = params[:month].to_i
       @year  = params[:year].to_i
-      @posts = Post.published_in(@month, @year).paginate(:page => params[:page])
+      @posts = Post.published_in(@month, @year).page(params[:page])
 
       set_meta_tags :description => "Smarteys blog archive for #{Date::MONTHNAMES[@month]} #{@year}"
       set_meta_tags :keywords => "smarteys, blog, archive, #{Date::MONTHNAMES[@month]} #{@year}"
@@ -53,7 +53,7 @@ module SimpleBlog
 
     def tag
       @tag = params[:tag]
-      @posts = Post.tagged_with(@tag).paginate(:page => params[:page])
+      @posts = Post.tagged_with(@tag).page(params[:page])
 
       set_meta_tags :description => "Smarteys blog posts tagged with #{@tag}"
       set_meta_tags :keywords => "smarteys, blog, #{@tag}"
@@ -61,7 +61,7 @@ module SimpleBlog
 
     def search
       @query = params[:q]
-      @posts = Post.search(@query).paginate(:page => params[:page])
+      @posts = Post.search(@query).page(params[:page])
 
       set_meta_tags :description => "Smarteys blog posts matching search query #{@query}"
       set_meta_tags :keywords => "smarteys, blog, #{@query}"
@@ -70,7 +70,7 @@ module SimpleBlog
     def author
       author = SimpleBlog.author_user_class.constantize.find(params[:author_id])
       @author_display_name = author.instance_eval("self.#{SimpleBlog.author_user_class_display_field}")
-      @posts = Post.where(:author_id => params[:author_id]).paginate(:page => params[:page])
+      @posts = Post.where(:author_id => params[:author_id]).page(params[:page])
 
       set_meta_tags :description => "Smarteys blog posts written by #{@author_display_name}"
       set_meta_tags :keywords => "smarteys, blog, #{@author_display_name}"

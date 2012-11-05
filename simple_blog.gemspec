@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   # TODO: Need to actually figure out which version of rails is required.
   s.add_dependency 'rails', '~> 3.2.0'
   # s.add_dependency "jquery-rails"
-  s.add_dependency 'will_paginate', '~> 3.0'
+  s.add_dependency 'kaminari'
   s.add_dependency 'rich'
 
   s.add_dependency 'meta-tags'
