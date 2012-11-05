@@ -14,7 +14,6 @@ module SimpleBlog
     end
 
     def get_tags
-      Tag.pluck(:name).uniq
       Tag.all.uniq { |tag| tag.name }
     end
 

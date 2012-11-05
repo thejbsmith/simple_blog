@@ -4,7 +4,7 @@ module SimpleBlog
   class PostsController < ApplicationController
 
     def index
-      @posts = Post.where(:published => true).paginate(:page => params[:page])
+      @posts = Post.published.paginate(:page => params[:page])
     end
   
     def show
