@@ -6,4 +6,4 @@
 
 <%= paginate @posts %>
 
-<p><%= link_to 'RSS Feed', feed_path %></p>
+<%= link_to('RSS FEED', posts_path(:format=>:rss)) %>

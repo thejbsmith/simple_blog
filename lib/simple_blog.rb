@@ -2,6 +2,11 @@ require "simple_blog/engine"
 
 module SimpleBlog
 
+  # Blog
+  mattr_accessor :blog_name
+  @@blog_name = 'Simple Blog'
+  mattr_accessor :blog_description
+
   # Posts
   mattr_accessor :author_user_class
   mattr_accessor :author_user_class_display_field

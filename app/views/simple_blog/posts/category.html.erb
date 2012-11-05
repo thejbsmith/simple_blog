@@ -5,3 +5,5 @@
 <%= render :partial => "post", :collection => @posts %>
 
 <%= paginate @posts %>
+
+<%= link_to('RSS FEED', category_path(@category.slug, :format=>:rss)) %>

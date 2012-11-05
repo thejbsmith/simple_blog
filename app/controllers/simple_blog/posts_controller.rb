@@ -5,6 +5,11 @@ module SimpleBlog
 
     def index
       @posts = Post.published.page(params[:page])
+
+      respond_to do |format|
+        format.html
+        format.rss
+      end
     end
   
     def show
@@ -30,8 +35,13 @@ module SimpleBlog
       @category = Category.find_by_slug(params[:slug])
       @posts = Post.published_in_category(@category).page(params[:page])
 
-      set_meta_tags :description => "Smarteys blog articles for #{@category.name}"
-      set_meta_tags :keywords => "smarteys, blog, #{@category.name}"
+      set_meta_tags :description => "Blog articles for #{@category.name}"
+      set_meta_tags :keywords => "blog, #{@category.name}"
+
+      respond_to do |format|
+        format.html
+        format.rss
+      end
     end
 
     def feed
@@ -47,33 +57,43 @@ module SimpleBlog
       @year  = params[:year].to_i
       @posts = Post.published_in(@month, @year).page(params[:page])
 
-      set_meta_tags :description => "Smarteys blog archive for #{Date::MONTHNAMES[@month]} #{@year}"
-      set_meta_tags :keywords => "smarteys, blog, archive, #{Date::MONTHNAMES[@month]} #{@year}"
+      set_meta_tags :description => "Blog archive for #{Date::MONTHNAMES[@month]} #{@year}"
+      set_meta_tags :keywords => "blog, archive, #{Date::MONTHNAMES[@month]} #{@year}"
     end
 
     def tag
       @tag = params[:tag]
       @posts = Post.tagged_with(@tag).page(params[:page])
 
-      set_meta_tags :description => "Smarteys blog posts tagged with #{@tag}"
-      set_meta_tags :keywords => "smarteys, blog, #{@tag}"
+      set_meta_tags :description => "Blog posts tagged with #{@tag}"
+      set_meta_tags :keywords => "blog, #{@tag}"
+
+      respond_to do |format|
+        format.html
+        format.rss
+      end
     end
 
     def search
       @query = params[:q]
       @posts = Post.search(@query).page(params[:page])
 
-      set_meta_tags :description => "Smarteys blog posts matching search query #{@query}"
-      set_meta_tags :keywords => "smarteys, blog, #{@query}"
+      set_meta_tags :description => "Blog posts matching search query #{@query}"
+      set_meta_tags :keywords => "blog, #{@query}"
     end
 
     def author
-      author = SimpleBlog.author_user_class.constantize.find(params[:author_id])
-      @author_display_name = author.instance_eval("self.#{SimpleBlog.author_user_class_display_field}")
+      @author = SimpleBlog.author_user_class.constantize.find(params[:author_id])
+      @author_display_name = @author.instance_eval("self.#{SimpleBlog.author_user_class_display_field}")
       @posts = Post.where(:author_id => params[:author_id]).page(params[:page])
 
-      set_meta_tags :description => "Smarteys blog posts written by #{@author_display_name}"
-      set_meta_tags :keywords => "smarteys, blog, #{@author_display_name}"
+      set_meta_tags :description => "Blog posts written by #{@author_display_name}"
+      set_meta_tags :keywords => "blog, #{@author_display_name}"
+
+      respond_to do |format|
+        format.html
+        format.rss
+      end
     end
 
   end

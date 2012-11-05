@@ -1,17 +1,15 @@
 SimpleBlog::Engine.routes.draw do
   
-  resources :posts, :only => [] do
+  resources :posts, :only => [:index] do
     resources :comments, :only =>[:create]
   end
 
   root :to => "posts#index"
   get '/page/:page' => 'posts#index'
 
-
-  get '/posts/:slug'    => 'posts#show',      :as => :post
-
-  # TODO: Might want to add a feed option to each 'page'
-  get '/feed'                   => 'posts#feed',      :as => :feed,       :defaults => { :format => :rss }
+  scope 'posts' do
+    get '/:slug'                    => 'posts#show',      :as => :post
+  end
 
   scope '/archive' do
     get ':year/:month'              => 'posts#archive',   :as => :archive
