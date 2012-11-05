@@ -25,7 +25,6 @@ SimpleBlog::Engine.routes.draw do
 
   scope '/search' do
     get '/'                         => 'posts#search',    :as => :search
-    get '/page/:page'               => 'posts#search'
   end
 
   scope '/categories' do
