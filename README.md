@@ -21,6 +21,8 @@ to your initializers/rich file
 If using ActiveAdmin add:
 //= require rich
 to app/assets/javascripts/active_admin.js
+If you would like to use S3 with rich, you will need to add the aws-sdk gem to your Gemfile, as well as place the folling code into your environment files
+  # Sample Code to go here
 
 SimpleBlog uses meta-tags (link to meta-tags gem)
 In order to display the meta tags correctly, go to your applications layout file and add
@@ -40,11 +42,16 @@ SimpleBlog.author_user_class_display_field = "email"
 If you would like a layout for SimpleBlog that is similar to your application layout, create app/views/layouts/simple_blog/application.html.erb and adjust accordingly. This will be used instead of your main application.html.erb but you can modify as needed, for example adding in a sidebar.
 
 SimpleBlog is now using Kaminari for pagination (ActiveAdmin also uses Kaminari)
+  # Add in simple explanation of how to override this
+  # Can probably just actually run Kaminari generator from main app
 
 
 Say you want to use your User table for the authors, but only want a subset to be able to actually be the Author of a page. In this case, set the User table normally, but then in your SimpleBlog initializer, specify a scope for your author class like:
 SimpleBlog.author_scope = 'my_custom_scope' # by default this will use all
 THEN, in your User model, you must create a scope called my_custom_scope. This can be however you want to select the Users that can be authors whether it is role based, email based, whatever you can normally do in a scope can be done here.
+
+Simple Blog now supports a biography field for Authors that can be defined, as well as an avatar method (defined below)
+SimpleBlog.author_user_class_avatar_method = "avatar.url(:medium)"
 
 
 ## Maybe ask if user is using ActiveAdmin

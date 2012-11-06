@@ -1,10 +1,6 @@
 if defined?(ActiveAdmin)
 
   ActiveAdmin.register SimpleBlog::Post, :as => 'Post' do
-    # controller do
-    #   authorize_resource
-    #   include ActiveAdminCanCan
-    # end
 
     # Menu
     menu :parent => 'Blog', :label => 'Posts'

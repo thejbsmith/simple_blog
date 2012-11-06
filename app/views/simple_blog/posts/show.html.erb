@@ -2,8 +2,22 @@
   <h1><%= @post.title %> <small><%= @post.date.strftime('%B %e, %Y') %></small></h1>
 </div>
 
+<h5>By <%= link_to(@post.author.instance_eval("self.#{SimpleBlog.author_user_class_display_field}"), author_path(@post.author)) %></h5>
+
 <p><%= @post.content.html_safe %></p>
 <p><b>Tags:</b> <%= tag_links(@post.tags) %></p>
+
+<% if SimpleBlog.author_user_class_biography_field %>
+  <% unless @post.author.instance_eval("self.#{SimpleBlog.author_user_class_biography_field}").blank? %>
+    <div>
+      <h5>Biography for <%= link_to(@post.author.instance_eval("self.#{SimpleBlog.author_user_class_display_field}"), author_path(@post.author)) %></h5>
+      <% if SimpleBlog.author_user_class_avatar_method %>
+        <%= image_tag(@post.author.instance_eval("self.#{SimpleBlog.author_user_class_avatar_method}")) %>
+      <% end %>
+      <%= @post.author.instance_eval("self.#{SimpleBlog.author_user_class_biography_field}").html_safe %>
+    </div>
+  <% end %>
+<% end %>
 
 <% if SimpleBlog.enable_comments %>
   <h3>Comments</h3>

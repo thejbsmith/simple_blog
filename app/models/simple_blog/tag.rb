@@ -5,7 +5,7 @@ module SimpleBlog
     belongs_to :post
 
     # Attributes
-    attr_accessible :name
+    attr_accessible :name, :post_id
 
   end
 end

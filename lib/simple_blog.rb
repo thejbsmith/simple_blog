@@ -10,6 +10,8 @@ module SimpleBlog
   # Posts
   mattr_accessor :author_user_class
   mattr_accessor :author_user_class_display_field
+  mattr_accessor :author_user_class_biography_field
+  mattr_accessor :author_user_class_avatar_method
   mattr_accessor :author_scope
   @@author_scope = 'all'
 
