@@ -36,6 +36,14 @@ module SimpleBlog
       post.date ||= Time.now
     end
 
+    def related_posts(count = 3)
+      related_posts = []
+      self.tags.each do |tag|
+        related_posts += Post.tagged_with(tag.name)
+      end
+      related_posts.uniq.shuffle[1..count]
+    end
+
     # Class methods
     def self.published_in_category(category)
       category.posts.published
