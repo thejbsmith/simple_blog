@@ -45,29 +45,25 @@ module SimpleBlog
     end
 
     # Class methods
-    def self.published_in_category(category)
-      category.posts.published
-    end
-
     def self.published_in(month, year)
       begin
         start_date = Date.new(year, month, 1)
         end_date   = start_date + 1.month
       rescue
-        self.published
+        self.includes([:author, :tags]).published
       end
-      self.published.where(:date => start_date..end_date)
+      self.where(:date => start_date..end_date).includes([:author, :tags]).published
     end
 
     def self.tagged_with(tag)
       # TODO: Decide if we want to match tags based on capitalization or not
       #       Right now this only matches EXACTLY. Word != word
-      self.joins(:tags).where("#{Tag.table_name}.name = ?", tag)
+      self.includes([:author, :tags]).joins(:tags).where("#{Tag.table_name}.name = ?", tag).published
     end
 
     def self.search(query)
       table = self.arel_table
-      self.where(table[:title].matches("%#{query}%").or(table[:content].matches("%#{query}%"))).published
+      self.where(table[:title].matches("%#{query}%").or(table[:content].matches("%#{query}%"))).includes([:author, :tags]).published
     end
 
   end

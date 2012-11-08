@@ -4,7 +4,7 @@ module SimpleBlog
   class PostsController < ApplicationController
 
     def index
-      @posts = Post.published.page(params[:page])
+      @posts = @published_posts.page(params[:page])
 
       respond_to do |format|
         format.html
@@ -13,7 +13,8 @@ module SimpleBlog
     end
   
     def show
-      @post = Post.find_by_slug(params[:slug])
+      @post = Post.where(:slug => params[:slug]).includes([:author, :tags, :open_graph_tags, :comments => [:commenter]]).first
+      @related_posts = @post.related_posts
 
       set_meta_tags :title => @post.title
 
@@ -32,8 +33,8 @@ module SimpleBlog
     end
 
     def category
-      @category = Category.find_by_slug(params[:slug])
-      @posts = Post.published_in_category(@category).page(params[:page])
+      @category = Category.where(:slug => params[:slug]).first
+      @posts = Post.where(:category_id => @category.id).includes([:author, :tags]).published.page(params[:page])
 
       set_meta_tags :description => "Blog articles for #{@category.name}"
       set_meta_tags :keywords => "blog, #{@category.name}"
@@ -41,14 +42,6 @@ module SimpleBlog
       respond_to do |format|
         format.html
         format.rss
-      end
-    end
-
-    def feed
-      @posts = Post.published
-      respond_to do |format|
-        format.rss { render :layout => false } #index.rss.builder
-        format.all { head :not_found }
       end
     end
 
@@ -63,7 +56,10 @@ module SimpleBlog
 
     def tag
       @tag = params[:tag]
-      @posts = Post.tagged_with(@tag).page(params[:page])
+      @posts = Post.tagged_with(@tag)
+      # For some reason Kaminari doesn't want to play nicely with join, where, and includes methods in a query (Kaminari is not returning all fields when the page method is called)
+      # In order to circumvent this, we are converting our active relation object to an array, and using Kaminari's paginate_array method to mock the same functionality
+      @posts = Kaminari.paginate_array(@posts.to_a).page(params[:page]).per(10)   # Since we are paginating an array (not our Post model), we need to specify how many items per page
 
       set_meta_tags :description => "Blog posts tagged with #{@tag}"
       set_meta_tags :keywords => "blog, #{@tag}"
@@ -85,7 +81,7 @@ module SimpleBlog
     def author
       @author = SimpleBlog.author_user_class.constantize.find(params[:author_id])
       @author_display_name = @author.instance_eval("self.#{SimpleBlog.author_user_class_display_field}")
-      @posts = Post.where(:author_id => params[:author_id]).page(params[:page])
+      @posts = Post.where(:author_id => params[:author_id]).includes([:author, :tags]).published.page(params[:page])
 
       set_meta_tags :description => "Blog posts written by #{@author_display_name}"
       set_meta_tags :keywords => "blog, #{@author_display_name}"

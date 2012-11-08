@@ -7,11 +7,11 @@
 <p><%= @post.content.html_safe %></p>
 <p><b>Tags:</b> <%= tag_links(@post.tags) %></p>
 
-<% if (related_posts = @post.related_posts) && related_posts.count > 0 %>
+<% if @related_posts && @related_posts.length > 0 %>
   <h4>Related Posts</h4>
   <div>
     <ul>
-      <% related_posts.each do |post| %>
+      <% @related_posts.each do |post| %>
         <li><%= link_to(post.title, post_path(post.slug)) %></li>
       <% end %>
     </ul>
