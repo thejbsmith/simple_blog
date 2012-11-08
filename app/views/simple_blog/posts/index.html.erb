@@ -2,7 +2,7 @@
   <h1>Simple Blog</h1>
 </div>
 
-<%= render :partial => "post", :collection => @posts %>
+<%= render :partial => "post", :collection => @posts, :locals => { :display => :grid } %>
 
 <%= paginate @posts %>
 

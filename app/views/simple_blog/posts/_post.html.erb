@@ -1,9 +1,21 @@
-<div class="well">
-  <h2><%= post_title_link(post) %></h2>
-  <small>Posted at <%= post.date.strftime('%l:%M %p %Z on %B %e, %Y') %> by <%= post_author_link(post) %></small>
-  <% unless post.excerpt.blank? %>
-    <p><%= post.excerpt.html_safe %></p>
-  <% end %>
-  <p><%= link_to('Read More', post_path(post.slug)) %></p>
-  <p><b>Tags:</b> <%= tag_links(post.tags) %></p>
-</div>
+<% if display == :grid %>
+  <div class="well">
+    <h2><%= post_title_link(post) %></h2>
+    <small>Posted at <%= post.date.strftime('%l:%M %p %Z on %B %e, %Y') %> by <%= post_author_link(post) %></small>
+    <% unless post.excerpt.blank? %>
+      <p><%#= post.excerpt.html_safe %></p>
+    <% end %>
+    <p><%= link_to('Read More', post_path(post.slug)) %></p>
+    <p><b>Tags:</b> <%= tag_links(post.tags) %></p>
+  </div>
+<% else %>
+    <div class="well">
+    <h2><%= post_title_link(post) %></h2>
+    <small>Posted at <%= post.date.strftime('%l:%M %p %Z on %B %e, %Y') %> by <%= post_author_link(post) %></small>
+    <% unless post.excerpt.blank? %>
+      <p><%= post.excerpt.html_safe %></p>
+    <% end %>
+    <p><%= link_to('Read More', post_path(post.slug)) %></p>
+    <p><b>Tags:</b> <%= tag_links(post.tags) %></p>
+  </div>
+<% end %>
