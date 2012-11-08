@@ -33,7 +33,7 @@ module SimpleBlog
     end
 
     set_callback(:initialize, :after) do |post|
-      post.date ||= Time.now
+      post.date ||= Time.now.utc
     end
 
     def related_posts(count = 3)

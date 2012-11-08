@@ -53,6 +53,10 @@ THEN, in your User model, you must create a scope called my_custom_scope. This c
 Simple Blog now supports a biography field for Authors that can be defined, as well as an avatar method (defined below)
 SimpleBlog.author_user_class_avatar_method = "avatar.url(:medium)"
 
+TimeZones
+You will need to set the time zone of your application. This can be set in your application.rb with the line:
+config.time_zone = 'Central Time (US & Canada)'
+
 
 ## Maybe ask if user is using ActiveAdmin
   # If so, then add defaults
