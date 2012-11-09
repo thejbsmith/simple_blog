@@ -67,6 +67,8 @@ config.time_zone = 'Central Time (US & Canada)'
 
 Blog Posts and Blog Categories have CanCan support. If CanCan is available in your application, then SimpleBlog checks if the user can manage either SimpleBlog::Category or SimpleBlog::Post
 
+The application is set up so that you can override activeadmin views defined by simple_blog
+
 
 ## Maybe ask if user is using ActiveAdmin
   # If so, then add defaults
