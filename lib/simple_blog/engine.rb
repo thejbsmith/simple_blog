@@ -8,7 +8,7 @@ module SimpleBlog
 
     initializer :simple_blog do
       if defined?(ActiveAdmin)
-        ActiveAdmin.application.load_paths += Dir[File.dirname(__FILE__) + '/admin']
+        ActiveAdmin.application.load_paths.unshift Dir[File.dirname(__FILE__) + '/admin']   # prepending to load path, this allows you to override the ActiveAdmin resources in parent application
       end
     end
   end

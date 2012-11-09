@@ -1,8 +1,9 @@
 if defined?(ActiveAdmin)
+
   ActiveAdmin.register SimpleBlog::Category, :as => 'Categories' do
 
     # Menu
-    menu :parent => 'Blog', :label => 'Categories'
+    menu :parent => 'Blog', :label => 'Categories', :if => proc{ (defined?(CanCan)) ? can?(:manage, SimpleBlog::Category) : true }
 
     # Index Page
     index do                            

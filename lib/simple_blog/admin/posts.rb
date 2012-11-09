@@ -3,7 +3,7 @@ if defined?(ActiveAdmin)
   ActiveAdmin.register SimpleBlog::Post, :as => 'Post' do
 
     # Menu
-    menu :parent => 'Blog', :label => 'Posts'
+    menu :parent => 'Blog', :label => 'Posts', :if => proc{ (defined?(CanCan)) ? can?(:manage, SimpleBlog::Post) : true }
 
     # Index Page
     index do                            

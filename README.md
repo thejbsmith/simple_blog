@@ -9,6 +9,14 @@ Add to gemfile
 # as well as Rich at /rich
 rails generate simple_blog:install
 
+Views Generator
+Copy over all simple_blog views to your application
+rails g simple_blog:views
+
+ActiveAdmin Views Generator
+Copy over all ActiveAdmin simple_blog views to your application
+rails g simple_blog:active_admin_views
+
 Add SimpleBlog link to your navigation:
   <li><%= link_to('Blog', main_app.blog_path) %></li>
 
@@ -56,6 +64,8 @@ SimpleBlog.author_user_class_avatar_method = "avatar.url(:medium)"
 TimeZones
 You will need to set the time zone of your application. This can be set in your application.rb with the line:
 config.time_zone = 'Central Time (US & Canada)'
+
+Blog Posts and Blog Categories have CanCan support. If CanCan is available in your application, then SimpleBlog checks if the user can manage either SimpleBlog::Category or SimpleBlog::Post
 
 
 ## Maybe ask if user is using ActiveAdmin
