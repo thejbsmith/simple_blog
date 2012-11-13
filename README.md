@@ -66,8 +66,15 @@ You will need to set the time zone of your application. This can be set in your 
 config.time_zone = 'Central Time (US & Canada)'
 
 Blog Posts and Blog Categories have CanCan support. If CanCan is available in your application, then SimpleBlog checks if the user can manage either SimpleBlog::Category or SimpleBlog::Post
+If you are using CanCan, you will need to add something like:
+can :manage, SimpleBlog::Post
+can :manage, SimpleBlog::Category
 
 The application is set up so that you can override activeadmin views defined by simple_blog
+
+Might want to mention how to set up configurable authentication for Rich, defined in Rich readme
+
+Also note that decorator support has been added, can add items in app/decorators/models/simple_blog/ or app/decorators/controllers/simple_blog to overwrite functionality of blog
 
 
 ## Maybe ask if user is using ActiveAdmin
