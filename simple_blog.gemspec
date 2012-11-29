@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = SimpleBlog::VERSION
   s.authors     = ["Jim Smith"]
   s.email       = ["jim@jimsmithdesign.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of SimpleBlog."
-  s.description = "TODO: Description of SimpleBlog."
+  s.homepage    = ""
+  s.summary     = "Simple Blog gem for rails"
+  s.description = "Simple Blog gem for rails"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
