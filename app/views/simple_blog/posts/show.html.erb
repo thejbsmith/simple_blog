@@ -36,6 +36,8 @@
 
   <% if allow_comments? %>
     <%= render "simple_blog/comments/form" %>
+  <% else %>
+    <p>Please sign in or register to leave a comment</p>
   <% end %>
 <% end %>
 
