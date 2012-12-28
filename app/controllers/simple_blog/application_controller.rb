@@ -4,7 +4,7 @@ class SimpleBlog::ApplicationController < ApplicationController
 
   def load_data
 
-    if !defined?(@@refreshed_time) || @@refreshed_time < (Time.now - 10.minutes)
+    if !defined?(@@simple_blog_refreshed_time) || @@simple_blog_refreshed_time < (Time.now - 10.minutes)
       # TODO: This is very simple memoization, only refreshing every 10 minutes. Might want to build this out in a better way.
       @@published_posts = SimpleBlog::Post.published.scoped(:include => [:author, :tags])
       @@categories = SimpleBlog::Category.all
@@ -16,7 +16,7 @@ class SimpleBlog::ApplicationController < ApplicationController
         dates.group_by{ |date| "#{date.month}/#{date.year}" }.collect{ |date| Date.strptime(date.first, "%m/%Y") }
       end
 
-      @@refreshed_time = Time.now
+      @@simple_blog_refreshed_time = Time.now
     end
 
     @published_posts = @@published_posts
