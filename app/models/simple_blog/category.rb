@@ -1,7 +1,7 @@
 module SimpleBlog
   class Category < ActiveRecord::Base
 
-    # Relations
+    # Associations
     has_many :posts
 
     # Attributes

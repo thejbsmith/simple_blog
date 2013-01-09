@@ -4,7 +4,7 @@ module SimpleBlog
     # Pagination
     paginates_per 10
 
-    # Relations
+    # Associations
     belongs_to  :author, :class_name => SimpleBlog.author_user_class
     belongs_to  :category
     has_many    :comments
@@ -15,7 +15,7 @@ module SimpleBlog
     accepts_nested_attributes_for :open_graph_tags, :allow_destroy => true
 
     # Attributes
-    attr_accessible :featured_image, :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id, :tags_attributes, :open_graph_tags_attributes, :meta_keywords, :meta_description, :author_id
+    attr_accessible :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id, :tags_attributes, :open_graph_tags_attributes, :meta_keywords, :meta_description, :author_id
 
     # Validations
     validates :title, presence: true, uniqueness: true
@@ -42,6 +42,10 @@ module SimpleBlog
         related_posts += Post.tagged_with(tag.name)
       end
       related_posts.uniq.shuffle[1..count]
+    end
+
+    def featured_image
+      Rich::RichFile.find(self.featured_image_id).rich_file if self.featured_image_id
     end
 
     # Class methods

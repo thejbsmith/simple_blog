@@ -1,7 +1,7 @@
 module SimpleBlog
   class Comment < ActiveRecord::Base
 
-    # Relations
+    # Associations
     belongs_to  :commenter, :class_name => SimpleBlog.commenter_user_class
     belongs_to  :post
     

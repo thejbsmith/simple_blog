@@ -5,12 +5,11 @@ class CreateSimpleBlogPosts < ActiveRecord::Migration
       t.references  :category
       t.string      :title
       t.string      :slug
-      t.string      :featured_image
       t.text        :content
       t.text        :excerpt
       t.datetime    :date
       t.boolean     :published
-
+      t.integer     :featured_image_id
       t.string      :meta_keywords
       t.string      :meta_description
 

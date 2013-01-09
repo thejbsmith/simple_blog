@@ -1,7 +1,7 @@
 module SimpleBlog
   class OpenGraphTag < ActiveRecord::Base
 
-    # Relations
+    # Associations
     belongs_to :post
 
      # Attributes

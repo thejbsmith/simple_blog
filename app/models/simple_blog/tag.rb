@@ -1,7 +1,7 @@
 module SimpleBlog
   class Tag < ActiveRecord::Base
 
-    # Relations
+    # Associations
     belongs_to :post
 
     # Attributes
