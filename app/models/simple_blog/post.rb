@@ -15,7 +15,7 @@ module SimpleBlog
     accepts_nested_attributes_for :open_graph_tags, :allow_destroy => true
 
     # Attributes
-    attr_accessible :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id, :tags_attributes, :open_graph_tags_attributes, :meta_keywords, :meta_description, :author_id
+    attr_accessible :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id, :tags_attributes, :open_graph_tags_attributes, :meta_keywords, :meta_description, :author_id, :featured_image_id
 
     # Validations
     validates :title, presence: true, uniqueness: true
