@@ -1,6 +1,4 @@
-<div class="page-header">
-  <h1><%= @category.name %></h1>
-</div>
+<h1><%= @category.name.html_safe %></h1>
 
 <%= render :partial => "post", :collection => @posts %>
 

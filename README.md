@@ -95,3 +95,9 @@ Also note that decorator support has been added, can add items in app/decorators
 Roadmap
 ==================
 Maybe allow commenting without association it with a model (maybe add in fields for comments like display name and email)
+
+look for a better way to set the content-type of uploaded files since the fileuploader.js script always sets it to application/octet-stream
+  - this could always be updated even better by fixing the fileuploader.js script
+  - right now this isn't being set in this application. we could with a decorator and then require that decorator (guess it doesn't really even have to be a decorator since engine doesn't automatically load them, but decorators keep things consistent)
+
+add in description of how to display the featured_image of blog posts

@@ -3,14 +3,14 @@
 <h4>Categories</h4>
 <ul>
   <% @categories.each do |category| %>
-    <li><%= link_to(category.name, category_path(category.slug)) %> <small>(<%= category.posts.length %>)</small></li>
+    <li><%= link_to(category.name.html_safe, category_path(category.slug)) %> <small>(<%= category.posts.length %>)</small></li>
   <% end %>
 </ul>
 
 <h4>Recent Posts</h4>
 <ul>
   <% @recent_posts[0,3].each do |post| %>
-    <li><%= link_to(post.title, post_path(post.slug)) %></li>
+    <li><%= link_to(post.title.html_safe, post_path(post.slug)) %></li>
   <% end %>
 </ul>
 

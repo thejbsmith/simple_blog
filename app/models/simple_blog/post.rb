@@ -10,6 +10,7 @@ module SimpleBlog
     has_many    :comments
     has_many    :tags
     has_many    :open_graph_tags
+    belongs_to  :featured_image, :class_name => Rich::RichFile
 
     accepts_nested_attributes_for :tags, :allow_destroy => true
     accepts_nested_attributes_for :open_graph_tags, :allow_destroy => true
@@ -44,9 +45,9 @@ module SimpleBlog
       related_posts.uniq.shuffle[1..count]
     end
 
-    def featured_image
-      Rich::RichFile.find(self.featured_image_id).rich_file if self.featured_image_id
-    end
+    # def featured_image
+    #   Rich::RichFile.find(self.featured_image_id).rich_file if self.featured_image_id
+    # end
 
     # Class methods
     def self.published_in(month, year)
