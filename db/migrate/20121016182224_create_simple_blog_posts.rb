@@ -1,3 +1,4 @@
+
 class CreateSimpleBlogPosts < ActiveRecord::Migration
   def change
     create_table :simple_blog_posts do |t|
@@ -9,11 +10,14 @@ class CreateSimpleBlogPosts < ActiveRecord::Migration
       t.text        :excerpt
       t.datetime    :date
       t.boolean     :published
-      t.integer     :featured_image_id
+      t.attachment  :featured_image
       t.string      :meta_keywords
       t.string      :meta_description
 
       t.timestamps
     end
+
+    add_index :simple_blog_posts, :author_id
+    add_index :simple_blog_posts, :category_id
   end
 end

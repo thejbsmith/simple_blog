@@ -10,13 +10,15 @@ module SimpleBlog
     has_many    :comments
     has_many    :tags
     has_many    :open_graph_tags
-    belongs_to  :featured_image, :class_name => Rich::RichFile
+
+    # Paperclip
+    has_attached_file :featured_image, :styles => { :large => '220x200', :thumb => "70x70" }, :default_url => 'missing_post_featured_image.jpg'
 
     accepts_nested_attributes_for :tags, :allow_destroy => true
     accepts_nested_attributes_for :open_graph_tags, :allow_destroy => true
 
     # Attributes
-    attr_accessible :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id, :tags_attributes, :open_graph_tags_attributes, :meta_keywords, :meta_description, :author_id, :featured_image_id
+    attr_accessible :content, :date, :excerpt, :published, :slug, :tags, :title, :category_id, :tags_attributes, :open_graph_tags_attributes, :meta_keywords, :meta_description, :author_id, :featured_image
 
     # Validations
     validates :title, presence: true, uniqueness: true
@@ -42,12 +44,10 @@ module SimpleBlog
       self.tags.each do |tag|
         related_posts += Post.tagged_with(tag.name)
       end
-      related_posts.uniq.shuffle[1..count]
+      # remove self from array since related_posts shouldn't include the current post
+      related_posts.delete(self)
+      related_posts.uniq.shuffle[0..count-1]
     end
-
-    # def featured_image
-    #   Rich::RichFile.find(self.featured_image_id).rich_file if self.featured_image_id
-    # end
 
     # Class methods
     def self.published_in(month, year)

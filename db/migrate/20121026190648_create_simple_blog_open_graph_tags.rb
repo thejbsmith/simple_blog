@@ -7,5 +7,7 @@ class CreateSimpleBlogOpenGraphTags < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :simple_blog_open_graph_tags, :post_id
   end
 end

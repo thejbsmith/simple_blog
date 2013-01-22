@@ -6,5 +6,7 @@ class CreateSimpleBlogTags < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :simple_blog_tags, :post_id
   end
 end

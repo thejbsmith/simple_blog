@@ -7,5 +7,8 @@ class CreateSimpleBlogComments < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :simple_blog_comments, :commenter_id
+    add_index :simple_blog_comments, :post_id
   end
 end

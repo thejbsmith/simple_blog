@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   # s.add_dependency "jquery-rails"
   s.add_dependency 'kaminari'
   s.add_dependency 'rich'
+  s.add_dependency 'paperclip', '~> 3.3.1'
 
   s.add_dependency 'meta-tags'
 

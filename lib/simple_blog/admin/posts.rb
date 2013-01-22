@@ -34,7 +34,7 @@ if defined?(ActiveAdmin)
         f.input :category
         f.input :title
         f.input :slug
-        f.input :featured_image, :as => :rich_picker, :config => { :hidden_input => true, :style => 'width: 400px !important;', :placeholder_image => image_path('simple_blog/placeholder.png'), :preview_size => '200px' }
+        f.input :featured_image, :hint => f.template.image_tag(f.object.featured_image.url(:large))
         f.input :content, :as => :rich, :config => { :width => '76%', :height => '400px' }
         f.input :excerpt, :as => :rich, :config => { :width => '76%', :height => '400px' }
         f.input :date
