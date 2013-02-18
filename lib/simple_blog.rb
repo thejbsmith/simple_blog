@@ -27,4 +27,6 @@ module SimpleBlog
 
   mattr_accessor :current_user_method
 
+  mattr_accessor :refreshed_time
+
 end

@@ -59,7 +59,7 @@ module SimpleBlog
       @posts = Post.tagged_with(@tag)
       # For some reason Kaminari doesn't want to play nicely with join, where, and includes methods in a query (Kaminari is not returning all fields when the page method is called)
       # In order to circumvent this, we are converting our active relation object to an array, and using Kaminari's paginate_array method to mock the same functionality
-      @posts = Kaminari.paginate_array(@posts.to_a).page(params[:page]).per(10)   # Since we are paginating an array (not our Post model), we need to specify how many items per page
+      @posts = Kaminari.paginate_array(@posts.to_a).page(params[:page]).per(9)   # Since we are paginating an array (not our Post model), we need to specify how many items per page
 
       set_meta_tags :description => "Blog posts tagged with #{@tag}"
       set_meta_tags :keywords => "blog, #{@tag}"
