@@ -3,6 +3,7 @@ class CreateSimpleBlogTags < ActiveRecord::Migration
     create_table :simple_blog_tags do |t|
       t.references   :post
       t.string       :name
+      t.integer      :parent_id
 
       t.timestamps
     end

@@ -13,7 +13,7 @@ module SimpleBlog
     end
   
     def show
-      @post = Post.where(:slug => params[:slug]).includes([:author, :tags, :open_graph_tags, :comments => [:commenter]]).first
+      @post = Post.where(:slug => params[:slug]).includes([:author, :tags, :open_graph_tags, :comments => [:commenter, :children]]).first
       @related_posts = @post.related_posts
 
       set_meta_tags :title => @post.title
